@@ -169,7 +169,7 @@ function calculate() {
 	let resultHtml = "<h3>Adjusted Recipe:</h3>"
 	for (let name in recipe) {
 		let newAmount = recipe[name].amount * scale
-		resultHtml += `${name}: ${newAmount.toFixed(2)} ${recipe[name].unit}<br>`
+		resultHtml += `${name.charAt(0).toUpperCase() + name.slice(1)}: ${newAmount.toFixed(2)} ${recipe[name].unit}<br>`
 	}
 	resultDiv.innerHTML = resultHtml
 }
