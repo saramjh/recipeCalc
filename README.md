@@ -1,6 +1,6 @@
 # Recipe Scaling Application
 
-This project is a web-based Recipe Scaling Application that allows users to input ingredients for a recipe, scale the amounts based on available quantities, and adjust the entire recipe accordingly. The application provides an easy-to-use interface to manage ingredients, perform calculations, and edit or delete entries as needed.
+This project is a web-based Recipe Adjustment Application that allows users to input ingredients for a recipe, scale the amounts based on available quantities, and adjust the entire recipe accordingly. The application provides an easy-to-use interface to manage ingredients, perform calculations, and edit or delete entries as needed.
 
 ## Features
 
@@ -21,8 +21,8 @@ This project is a web-based Recipe Scaling Application that allows users to inpu
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/recipe-scaling-app.git
-cd recipe-scaling-app
+git clone https://github.com/saramjh/recipeCalc.git
+cd recipeCalc-app
 ```
 
 ### 2. Open the Project
