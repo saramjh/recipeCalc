@@ -1,7 +1,5 @@
 # Recipe Scaling Application
-<img width="904" alt="image" src="https://github.com/user-attachments/assets/19a83d35-a157-451b-bdfd-1a14bc8b08c9">
-
-<img width="904" alt="image" src="https://github.com/user-attachments/assets/19a83d35-a157-451b-bdfd-1a14bc8b08c9">
+<a href="https://saramjh.github.io/recipeCalc/"><img width="904" alt="image" src="https://github.com/user-attachments/assets/19a83d35-a157-451b-bdfd-1a14bc8b08c9"></a>
 
 This project is a web-based Recipe Adjustment Application that allows users to input ingredients for a recipe, scale the amounts based on available quantities, and adjust the entire recipe accordingly. The application provides an easy-to-use interface to manage ingredients, perform calculations, and edit or delete entries as needed.
 <a href="https://saramjh.github.io/recipeCalc/">Go to the Tool</a>
