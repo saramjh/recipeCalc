@@ -1,4 +1,5 @@
 # Recipe Scaling Application
+<img width="904" alt="image" src="https://github.com/user-attachments/assets/19a83d35-a157-451b-bdfd-1a14bc8b08c9">
 
 <img width="904" alt="image" src="https://github.com/user-attachments/assets/19a83d35-a157-451b-bdfd-1a14bc8b08c9">
 
