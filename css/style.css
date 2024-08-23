@@ -658,6 +658,7 @@ footer {
 	padding: 5px;
 	text-align: center;
 	width: 100%;
+	box-sizing: border-box;
 }
 
 footer p {
