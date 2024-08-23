@@ -59,10 +59,18 @@ header p {
 
 .ingredient-input {
 	display: flex;
+	flex-wrap: wrap;
+	align-content: space-between;
 	justify-content: space-between;
 	width: 100%;
 	gap: 10px;
 	box-sizing: border-box;
+}
+#or {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 200;
 }
 
 #multipleIngredients {
@@ -71,7 +79,7 @@ header p {
 	justify-content: space-between;
 	background-color: rgba(0, 0, 0, 0.05);
 	padding: 15px;
-	width: 50%;
+	width: 60%;
 	height: 100%;
 	min-height: 298px;
 	border-radius: 1rem;
@@ -84,8 +92,9 @@ header p {
 	justify-content: space-between;
 	background-color: rgba(0, 0, 0, 0.05);
 	padding: 15px;
-	width: 50%;
+	width: 30%;
 	border-radius: 1rem;
+	box-sizing: border-box;
 }
 
 h2 {
@@ -106,7 +115,8 @@ label {
 
 textarea {
 	width: 100%;
-	min-height: 155px;
+	height: 100%;
+	min-height: 178px;
 	padding: 0.5rem 0.7rem;
 	margin-bottom: 1rem;
 	box-sizing: border-box;
@@ -130,7 +140,7 @@ button {
 
 select {
 	width: 100%;
-	background-color: #ec8d84;
+	background-color: #fbf7f7;
 	padding: 10px;
 	margin: 0 0 0.5rem;
 	box-sizing: border-box;
@@ -138,21 +148,19 @@ select {
 	border: 1px solid #ddd;
 	font-size: 1.2rem;
 	font-weight: 600;
-	color: #fff;
+	color: #4d4d4d;
 }
 
 #resetBtn {
 	display: flex;
-	justify-content: end;
-	padding-right: 12px;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
 }
 #resetBtn button {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 16.7rem;
-	height: 2rem;
-	margin: 0 0 0 100px;
 	background-color: #ca5146;
 	box-sizing: border-box;
 }
@@ -298,12 +306,110 @@ button:hover {
 	text-align: right;
 }
 
+#result {
+	display: flex;
+	flex-direction: column;
+	background-color: #f8e4a2;
+	border-radius: 0.3rem;
+	padding: 0.5rem;
+	box-sizing: border-box;
+}
+#resultText {
+	display: block;
+	width: 100%;
+	background-color: #ca5146;
+	color: #fff;
+	border-radius: 0.3rem;
+	padding: 0.5rem 0.7rem;
+	margin: 0 0.5 0.5rem;
+	font-size: 1.3rem;
+	font-weight: 700;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+#result h3 {
+	background-color: #ca5146;
+	color: #fff;
+	border-radius: 0.3rem;
+	padding: 0.5rem 0.7rem;
+	margin: 0 0.5 0.5rem;
+	text-align: center;
+}
+
+#result p {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	text-align: center;
+	font-size: 1rem;
+	font-weight: 700;
+	border-radius: 0.2rem;
+	padding: 0.5rem 0.2rem 1rem 0.5rem;
+	margin: 0;
+	color: #fff;
+	box-sizing: border-box;
+	border-bottom: 2px dashed #ca5146;
+}
+
+#result p span {
+	text-align: center;
+	font-size: 1.1rem;
+	font-weight: 700;
+	border-radius: 0.2rem;
+	padding: 0.7rem 1rem;
+	color: #fff;
+	box-sizing: border-box;
+}
+
+#result p span:nth-child(1) {
+	background-color: #e55347;
+	min-width: 180px;
+}
+
+#result p span:nth-child(2) {
+	background-color: #7d7d7d;
+	min-width: 180px;
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
 	.container {
 		padding: 10px;
 	}
+	.ingredient-input {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 100%;
+		gap: 10px;
+		box-sizing: border-box;
+		border-radius: 1rem;
+		box-shadow: 0 2px 3px 2px rgba(0, 0, 0, 0.1);
+	}
 
+	#multipleIngredients {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		background-color: rgba(255, 255, 255, 1);
+		padding: 15px;
+		width: 100%;
+		height: 100%;
+		min-height: 298px;
+		border-radius: 1rem;
+		box-sizing: inherit;
+	}
+	#singleIngredient {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		background-color: rgba(0, 0, 0, 0.05);
+		padding: 15px;
+		width: 100%;
+		border-radius: 1rem;
+		box-sizing: border-box;
+	}
 	.section {
 		padding: 15px;
 	}
@@ -404,7 +510,6 @@ button:hover {
 
 	#multipleIngredients::after {
 		text-align: center;
-		content: "- or -";
 		margin: -15px 0;
 	}
 
@@ -418,7 +523,15 @@ button:hover {
 		border-radius: 1rem;
 		box-sizing: border-box;
 	}
+	#result p span:nth-child(1) {
+		background-color: #e55347;
+		min-width: 80px;
+	}
 
+	#result p span:nth-child(2) {
+		background-color: #7d7d7d;
+		min-width: 50px;
+	}
 	textarea {
 		width: 100%;
 		min-height: 155px;

@@ -18,8 +18,8 @@ let deleteMessage = document.getElementById("deleteMessage")
 let ingredientToEdit, ingredientToDelete
 
 function addIngredient() {
-	let name = ingredientNameInput.value.trim()
-	let amount = parseInt(ingredientAmountInput.value.trim(), 10)
+	let name = ingredientNameInput.value.trim().toLowerCase() // Convert to lowercase for consistency
+	let amount = parseFloat(ingredientAmountInput.value.trim()) // Allow decimal values
 	let unit = document.getElementById("ingredientUnit").value
 
 	// Reset error messages
@@ -31,7 +31,7 @@ function addIngredient() {
 		clearInputs()
 		calculate() // Recalculate after adding a new ingredient
 	} else {
-		showModal("Please enter a valid ingredient name and positive integer amount.")
+		showModal("Please enter a valid ingredient name and positive numeric amount.")
 	}
 }
 
@@ -61,7 +61,7 @@ function updateAvailableIngredients() {
 	availableIngredients.innerHTML = ""
 	for (let name in recipe) {
 		let option = document.createElement("option")
-		option.value = name.charAt(0).toUpperCase() + name.slice(1)
+		option.value = name
 		option.textContent = name.charAt(0).toUpperCase() + name.slice(1)
 		availableIngredients.appendChild(option)
 	}
@@ -77,14 +77,14 @@ function updateAvailableIngredients() {
 
 function editIngredient(name) {
 	ingredientToEdit = name
-	editIngredientNameInput.value = name
+	editIngredientNameInput.value = name.charAt(0).toUpperCase() + name.slice(1)
 	editIngredientAmountInput.value = recipe[name].amount
 	editModal.style.display = "block"
 }
 
 function modifyIngredient() {
-	let name = editIngredientNameInput.value.trim()
-	let amount = parseInt(editIngredientAmountInput.value.trim(), 10)
+	let name = editIngredientNameInput.value.trim().toLowerCase()
+	let amount = parseFloat(editIngredientAmountInput.value.trim())
 
 	if (name && !isNaN(amount) && amount > 0) {
 		// Update the recipe object
@@ -97,13 +97,13 @@ function modifyIngredient() {
 		closeEditModal()
 		calculate() // Recalculate after modifying an ingredient
 	} else {
-		showModal("Please enter a valid ingredient name and positive integer amount.")
+		showModal("Please enter a valid ingredient name and positive numeric amount.")
 	}
 }
 
 function promptDelete(name) {
 	ingredientToDelete = name
-	deleteMessage.textContent = `Are you sure you want to delete "${name}"?`
+	deleteMessage.textContent = `Are you sure you want to delete "${name.charAt(0).toUpperCase() + name.slice(1)}"?`
 	deleteModal.style.display = "block"
 }
 
@@ -150,8 +150,8 @@ function closeDeleteModal() {
 }
 
 function calculate() {
-	let selectedIngredient = availableIngredients.value
-	let selectedAmount = parseInt(availableAmountInput.value.trim(), 10)
+	let selectedIngredient = availableIngredients.value.toLowerCase() // Ensure case-insensitivity
+	let selectedAmount = parseFloat(availableAmountInput.value.trim())
 
 	// Reset error messages
 	availableAmountError.textContent = ""
@@ -161,15 +161,15 @@ function calculate() {
 		return
 	}
 	if (isNaN(selectedAmount) || selectedAmount <= 0) {
-		availableAmountError.textContent = "Please enter a valid positive integer amount for available ingredients."
+		availableAmountError.textContent = "Please enter a valid positive numeric amount for available ingredients."
 		return
 	}
 
 	let scale = selectedAmount / recipe[selectedIngredient].amount
-	let resultHtml = "<h3>Adjusted Recipe:</h3>"
+	let resultHtml = "<h3>Adjusted Recipe</h3>"
 	for (let name in recipe) {
 		let newAmount = recipe[name].amount * scale
-		resultHtml += `${name.charAt(0).toUpperCase() + name.slice(1)}: ${newAmount.toFixed(2)} ${recipe[name].unit}<br>`
+		resultHtml += `<p><span>${newAmount.toFixed(2)}${recipe[name].unit}</span> <span>${name.charAt(0).toUpperCase() + name.slice(1)}</span></p><br>`
 	}
 	resultDiv.innerHTML = resultHtml
 }
@@ -195,7 +195,7 @@ function addMultipleIngredients() {
 		let amountPart = parts[0]
 		let unit = amountPart.match(/[a-zA-Z]+/g)?.[0] || ""
 		let amount = parseFloat(amountPart) || 0
-		let name = parts.slice(1).join(" ")
+		let name = parts.slice(1).join(" ").toLowerCase()
 
 		if (amount && amount > 0 && name) {
 			recipe[name] = { amount: amount, unit: unit }
