@@ -151,13 +151,13 @@ select {
 	color: #4d4d4d;
 }
 
-#resetBtn {
+.resetBtn {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
 }
-#resetBtn button {
+.resetBtn button {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -168,14 +168,14 @@ select {
 	font-weight: 600;
 }
 
-#resetBtn button:nth-child(2) {
+.resetBtn button:nth-child(2) {
 	background-color: #e55347;
 }
-#resetBtn button:nth-child(1):hover {
+.resetBtn button:nth-child(1):hover {
 	background-color: #712019;
 }
 
-#resetBtn button:nth-child(2):hover {
+.resetBtn button:nth-child(2):hover {
 	background-color: #712019;
 }
 
