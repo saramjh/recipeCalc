@@ -436,7 +436,7 @@ button:hover {
 	select,
 	button {
 		font-size: 14px;
-		padding: 8px;
+		padding: 5px;
 	}
 
 	.recipe-item {
@@ -462,6 +462,7 @@ button:hover {
 	.recipe-item button {
 		max-width: 100px;
 		margin: 0 3px;
+		padding: 5px 10px;
 	}
 
 	.modal-content {
