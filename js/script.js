@@ -17,6 +17,28 @@ let deleteModal = document.getElementById("deleteModal")
 let deleteMessage = document.getElementById("deleteMessage")
 let ingredientToEdit, ingredientToDelete
 
+// Emit confirmed recipe actions only; never collect ingredient names or quantities.
+let recipeScaleEventTimer = null
+let recipeStartedTracked = false
+function recipeAnalytics(name, params = {}) {
+  if (typeof window.gtag === "function") window.gtag("event", name, params)
+}
+function trackRecipeStart() {
+  if (recipeStartedTracked || !Object.keys(recipe).length) return
+  recipeStartedTracked = true
+  recipeAnalytics("recipe_started")
+}
+function scheduleRecipeScaleEvent(scale) {
+  clearTimeout(recipeScaleEventTimer)
+  const bucket = scale < 1 ? "decrease" : scale > 1 ? "increase" : "unchanged"
+  recipeScaleEventTimer = setTimeout(() => {
+    recipeAnalytics("recipe_scaled", {
+      scale_direction: bucket,
+      ingredient_count: Object.keys(recipe).length,
+    })
+  }, 1200)
+}
+
 function addIngredient() {
 	let name = ingredientNameInput.value.trim().toLowerCase() // Convert to lowercase for consistency
 	let amount = parseFloat(ingredientAmountInput.value.trim()) // Allow decimal values
@@ -28,6 +50,7 @@ function addIngredient() {
 	if (name && !isNaN(amount) && amount > 0) {
 		recipe[name] = { amount: amount, unit: unit }
 		updateRecipeList()
+		trackRecipeStart()
 		clearInputs()
 		calculate() // Recalculate after adding a new ingredient
 	} else {
@@ -157,10 +180,12 @@ function calculate() {
 	availableAmountError.textContent = ""
 
 	if (!selectedIngredient) {
+		clearTimeout(recipeScaleEventTimer)
 		resultDiv.innerHTML = "" // Clear result if no ingredient is selected
 		return
 	}
 	if (isNaN(selectedAmount) || selectedAmount <= 0) {
+		clearTimeout(recipeScaleEventTimer)
 		availableAmountError.textContent = "Please enter a valid positive numeric amount for available ingredients."
 		return
 	}
@@ -172,6 +197,7 @@ function calculate() {
 		resultHtml += `<p><span>${newAmount.toFixed(2)}${recipe[name].unit}</span> <span>${name.charAt(0).toUpperCase() + name.slice(1)}</span></p><br>`
 	}
 	resultDiv.innerHTML = resultHtml
+	scheduleRecipeScaleEvent(scale)
 }
 
 // Event listeners for changes
@@ -205,6 +231,7 @@ function addMultipleIngredients() {
 	})
 
 	updateRecipeList()
+	trackRecipeStart()
 	clearInputs()
 	calculate() // Recalculate after adding multiple ingredients
 }
